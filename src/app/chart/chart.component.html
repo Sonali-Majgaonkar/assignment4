@@ -1,0 +1,65 @@
+
+<div class="container">
+    <h4 class="display-4 mt-5 text-info">Chart Formation</h4>
+    <div class="row">
+        <div class="col">
+            <form class="chart p-5" [formGroup]="chartForm" (ngSubmit)="onsubmit()">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="firstValue">First Value</label>
+                            <input type="number" name="firstValue" id="firstValue" class="form-control"
+                                formControlName="firstValue" (blur)="onBlurEve()">
+                            <span class="text-danger"
+                                *ngIf="!chartForm.get('firstValue').valid && chartForm.get('firstValue').touched">
+                                <ng-container *ngIf="chartForm.get('firstValue')?.errors?.required">
+                                    Enter valid number..!
+                                </ng-container>
+
+                                <ng-container *ngIf="chartForm.get('firstValue')?.errors?.max">
+                                    Incorrect Value. Number less than 100
+                                </ng-container>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="secondValue">Second Value</label>
+                            <input type="number" name="secondValue" id="secondValue" class="form-control"
+                                formControlName="secondValue" (blur)="onBlurEve()">
+                            <span class="text-danger"
+                                *ngIf="!chartForm.get('secondValue').valid && chartForm.get('secondValue').touched">
+
+                                <ng-container *ngIf="chartForm.get('secondValue')?.errors?.required">
+                                    Enter valid number..!
+                                </ng-container>
+
+                                <ng-container *ngIf="chartForm.get('secondValue')?.errors?.max">
+                                    Incorrect Value. Number less than 100
+                                </ng-container>
+                            </span>
+                        </div>
+                    </div>
+                    <!-- <p>{{chartForm.get('firstValue').value}}</p> -->
+                    <div class="col-4 mt-2">
+                        <button type="submit" class="btn btn-info mt-4" [disabled]="!chartForm.valid">Create</button>
+                    </div>
+          
+                </div>
+            </form>
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="chart-container">
+                <canvas  id="MyChart" >{{ chart }}</canvas>
+          </div>
+        </div>
+    </div>
+</div>
+<!-- 
+
+    [value]="100 - chartForm.get('secondValue').value"
+[value]="100 - chartForm.get('firstValue').value"
+ -->
